@@ -1,0 +1,5 @@
+Defination and Declaration of a variable:
+
+Declaration: Let's the machine know the data type of a variable but does not allocate memory to it.
+Defination: Let's the machine know the data type of a variable and also allocates memory to it.
+
