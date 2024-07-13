@@ -19,8 +19,7 @@ typedef struct{
 }GPIO_TypeDef;
 
 #define GPIOA_BASE (0x40020000)
-#define GPIOA0 ((GPIO_TypeDef *)GPIOA_BASE)
-#define GPIOA1 ((GPIO_TypeDef *)GPIOA_BASE)
+#define GPIOA ((GPIO_TypeDef *)GPIOA_BASE)
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
@@ -34,26 +33,21 @@ int main(void)
 {
 	*RCC|=(1<<0)| (1<<2);
 
-	GPIOA0->MODER |=1;  //Port-A0 made output
-	GPIOA0->OTYPER &=~1;
-	GPIOA0->OSPEEDR |=1;
-	GPIOA0->PUPDR &=~3;
-
-	GPIOA1->MODER |=(1<<2);  //Port-A1 made output
-	GPIOA1->OTYPER &=~(1<<1);
-	GPIOA1->OSPEEDR |=(1<<2);
-	GPIOA1->PUPDR &=~(3<<2);
+	GPIOA->MODER |=5;  //Port-A0 and A1 made output
+	GPIOA->OTYPER &=~3;
+	GPIOA->OSPEEDR |=5;
+	GPIOA->PUPDR &=~15;
 
 	printf("Hello World\n");
 
 	for(;;){
-		GPIOA0->ODR &=~1;
-		delay(1000000);
-		GPIOA0->ODR |=1;
-		delay(1000000);
-		GPIOA1->ODR &=~(1<<1);
-		delay(1000000);
-		GPIOA1->ODR |=(1<<1);
-		delay(1000000);
+		GPIOA->ODR |=1;
+		delay(500000);
+		GPIOA->ODR &=~1;
+		delay(500000);
+		GPIOA->ODR |=(1<<1);
+		delay(500000);
+		GPIOA->ODR &=~(1<<1);
+		delay(500000);
 	}
 }
