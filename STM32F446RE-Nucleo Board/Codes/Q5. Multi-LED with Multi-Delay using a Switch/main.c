@@ -47,13 +47,13 @@ int main(void)
 	printf("Hello World\n");
 
 	for(;;){
-		GPIOA0->ODR &=~(1<<5);
-		delay(200000);
-		GPIOA0->ODR |=(1<<5);
-		delay(200000);
-		GPIOA1->ODR &=~(1<<5);
-		delay(500000);
-		GPIOA1->ODR |=(1<<5);
-		delay(500000);
+		GPIOA0->ODR &=~1;
+		delay(1000000);
+		GPIOA0->ODR |=1;
+		delay(1000000);
+		GPIOA1->ODR &=~(1<<1);
+		delay(1000000);
+		GPIOA1->ODR |=(1<<1);
+		delay(1000000);
 	}
 }
